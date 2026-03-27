@@ -1,0 +1,6 @@
+/discord-articles
+/target
+/discord-cli
+.next
+node_modules
+out
