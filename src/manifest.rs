@@ -144,6 +144,20 @@ pub fn command_specs() -> Vec<CommandSpec> {
             params: vec![],
         },
         CommandSpec {
+            name: "open",
+            category: "write",
+            wave: 1,
+            execution_mode: "ui-first",
+            summary: "Navigate browser to a URL (default: https://discord.com)",
+            requires_auth: false,
+            params: vec![ParamSpec {
+                name: "url",
+                kind: "string",
+                required: true,
+                description: "URL to navigate to",
+            }],
+        },
+        CommandSpec {
             name: "members",
             category: "read",
             wave: 1,
@@ -309,6 +323,12 @@ pub fn tool_specs() -> Vec<ToolSpec> {
             requires_auth: false,
         },
         ToolSpec {
+            name: "discord_open",
+            command: "open",
+            read_only: true,
+            requires_auth: false,
+        },
+        ToolSpec {
             name: "discord_status",
             command: "status",
             read_only: true,
@@ -357,7 +377,7 @@ mod tests {
     #[test]
     fn all_seven_commands_registered() {
         let commands = command_specs();
-        assert_eq!(commands.len(), 8);
+        assert_eq!(commands.len(), 9);
         let names: Vec<&str> = commands.iter().map(|c| c.name).collect();
         assert!(names.contains(&"servers"));
         assert!(names.contains(&"channels"));
@@ -372,7 +392,7 @@ mod tests {
     #[test]
     fn all_seven_tools_registered() {
         let tools = tool_specs();
-        assert_eq!(tools.len(), 8);
+        assert_eq!(tools.len(), 9);
         assert!(tools.iter().any(|t| t.name == "discord_servers"));
         assert!(tools.iter().any(|t| t.name == "discord_send"));
         assert!(tools.iter().any(|t| t.name == "discord_switch"));

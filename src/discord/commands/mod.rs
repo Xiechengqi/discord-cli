@@ -1,5 +1,6 @@
 pub mod channels;
 pub mod members;
+pub mod open;
 pub mod read;
 pub mod search;
 pub mod send;

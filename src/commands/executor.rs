@@ -4,7 +4,7 @@ use crate::agent_browser::client::AgentBrowserClient;
 use crate::agent_browser::types::AgentBrowserOptions;
 use crate::commands::registry::CommandRegistry;
 use crate::config::AppConfig;
-use crate::discord::commands::{channels, members, read, search, send, servers, status, switch};
+use crate::discord::commands::{channels, members, open, read, search, send, servers, status, switch};
 use crate::errors::{AppError, AppResult};
 
 #[derive(Clone)]
@@ -43,6 +43,7 @@ impl CommandExecutor {
         match command.name {
             "channels" => channels::execute(&client, &params).await,
             "members" => members::execute(&client, &params).await,
+            "open" => open::execute(&client, &params).await,
             "read" => read::execute(&client, &params).await,
             "search" => search::execute(&client, &params).await,
             "send" => send::execute(&client, &params).await,

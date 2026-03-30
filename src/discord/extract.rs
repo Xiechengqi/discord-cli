@@ -18,6 +18,10 @@ pub fn optional_string<'a>(params: &'a Value, key: &str) -> Option<&'a str> {
 pub fn optional_u64(params: &Value, key: &str, default: u64) -> u64 {
     params
         .get(key)
-        .and_then(Value::as_u64)
+        .and_then(|v| {
+            v.as_u64().or_else(|| {
+                v.as_str().and_then(|s| s.parse::<u64>().ok())
+            })
+        })
         .unwrap_or(default)
 }
